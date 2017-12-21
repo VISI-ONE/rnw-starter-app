@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LocalePicker component renders properly - web 1`] = `
+<select
+  className={63}
+  onChange={[Function]}
+  value="en-US"
+>
+  <option
+    value="en-US"
+  >
+    en
+  </option>
+  <option
+    value="de-DE"
+  >
+    de
+  </option>
+</select>
+`;

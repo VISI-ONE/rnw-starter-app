@@ -1,5 +1,5 @@
 /* eslint-disable no-plusplus, no-return-assign */
-import { ScrollView, Text, Platform, TextInput, View } from 'react-native';
+import { Text, Platform, TextInput, View } from 'react-native';
 import React from 'react';
 import { shallow } from 'enzyme';
 // Note: test renderer must be required after react-native.
@@ -12,7 +12,6 @@ import Button from '../../components/Button/Button';
 import translations from '../../utils/locales/en-US';
 import Routing from '../../utils/routing';
 import Router from '../../__mocks__/Router';
-import { login as loginRequest, resetCounter, getCounter } from '../../utils/modules/auth';
 import { isWeb } from '../../utils/common';
 
 const { Redirect } = Routing;
@@ -21,25 +20,6 @@ const fakeUserData = {
   email: 'fakeUser1',
   password: 123456
 };
-
-jest.mock('../../utils/modules/auth', () => {
-  let checkUserTokenCallCounter = 0;
-  const token = '007';
-  return {
-    resetCounter: () => checkUserTokenCallCounter = 0,
-    getCounter: () => checkUserTokenCallCounter,
-    login: () => {
-      checkUserTokenCallCounter++;
-      if (global.shouldReturnResponseForAccountLogin === 'error') {
-        return Promise.reject(new Error('error'));
-      }
-      if (global.shouldReturnResponseForAccountLogin) {
-        return Promise.resolve({ status: 'success', token });
-      }
-      return Promise.resolve({ message: 'error' });
-    }
-  };
-});
 
 describe('AccountLogin page', () => {
   describe('rendering', () => {
@@ -53,26 +33,28 @@ describe('AccountLogin page', () => {
       const login = jest.fn();
       const enzymeTree = shallow(<AccountLogin isLoggedIn={false} dispatchLogin={login} translations={translations} />);
       const content = (
-        <View style={styles.loginForm}>
-          <Text style={styles.label}>{translations.login__email__label}</Text>
-          <TextInput onChangeText={this.onEmailChange} placeholder={translations.login__email__placeholder} style={styles.textinput} />
-          <Text style={styles.label}>{translations.login__password__label}</Text>
-          <TextInput
-            secureTextEntry
-            onChangeText={this.onPassChange}
-            placeholder={translations.login__password__placeholder}
-            style={styles.textinput}
-          />
-          <Button style={styles.button} textStyle={styles.buttonText} onClick={this.login} text={translations.login} />
+        <View style={styles.container}>
+          <View style={styles.loginForm}>
+            <Text style={styles.label}>{translations.login__email__label}</Text>
+            <TextInput
+              onChangeText={this.onEmailChange}
+              placeholder={translations.login__email__placeholder}
+              style={styles.textinput}
+              onKeyPress={this.handleKeyDown}
+            />
+            <Text style={styles.label}>{translations.login__password__label}</Text>
+            <TextInput
+              secureTextEntry
+              onChangeText={this.onPassChange}
+              placeholder={translations.login__password__placeholder}
+              style={styles.textinput}
+              onKeyPress={this.handleKeyDown}
+            />
+            <Button style={styles.button} textStyle={styles.buttonText} onClick={this.submit} text={translations.login} />
+          </View>
         </View>
       );
-      const wrapper = shallow(
-        Platform.OS === 'web' ? content : (
-          <ScrollView>
-            {content}
-          </ScrollView>
-        )
-      );
+      const wrapper = shallow(content);
 
       expect(enzymeTree.html()).toEqual(wrapper.html());
     });
@@ -91,19 +73,13 @@ describe('AccountLogin page', () => {
 
   describe('functionality', () => {
     it('submit function should submits the form and calls the login action', () => {
-      global.shouldReturnResponseForAccountLogin = true;
-      resetCounter();
       const login = jest.fn();
       const tree = shallow(<AccountLogin isLoggedIn={false} dispatchLogin={login} translations={translations} />);
       const btn = tree.find({ text: translations.login });
 
       tree.setState(fakeUserData);
       btn.simulate('click');
-      expect(getCounter()).toEqual(1);
-      return loginRequest().then(() => {
-        expect(login).toBeCalledWith({});
-        global.shouldReturnResponseForAccountLogin = false;
-      });
+      expect(login).toBeCalledWith({ email: fakeUserData.email });
     });
 
     it('redirects to home when user is logged in', () => {
@@ -137,35 +113,6 @@ describe('AccountLogin page', () => {
       instance.onPassChange(value);
 
       expect(instance.state).toEqual({ email: '', password: value, error: '' });
-    });
-
-    it('submit should set an error when no token returned', () => {
-      global.shouldReturnResponseForAccountLogin = false;
-      const login = jest.fn();
-      const tree = shallow(<AccountLogin isLoggedIn={false} dispatchLogin={login} translations={translations} />);
-      const btn = tree.find({ text: translations.login });
-
-      btn.simulate('click');
-      return loginRequest().then(() => {
-        expect(tree.state()).toEqual({ email: '', password: '', error: 'error' });
-      });
-    });
-
-    it('submit should set an error when response sends an error', () => {
-      global.shouldReturnResponseForAccountLogin = 'error';
-      const login = jest.fn();
-      resetCounter();
-      const treeInstance = renderer.create(<AccountLogin isLoggedIn={false} dispatchLogin={login} translations={translations} />).getInstance();
-      treeInstance.setState = jest.fn();
-      treeInstance.submit();
-      expect(getCounter()).toEqual(1);
-      global.shouldReturnResponseForAccountLogin = false;
-
-      return loginRequest().then(() => {
-        return loginRequest().then(() => {
-          expect(treeInstance.setState.mock.calls[1]).toEqual([{ error: 'error' }]);
-        });
-      });
     });
 
     it('handleKeyDown calls should not call submit when receives any other key except for Enter', () => {

@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, TextInput, ScrollView, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { login as loginAction } from '../../actions/auth';
 import Button from '../../components/Button';
 import Routing from '../../utils/routing';
-import { isWeb, extractValueFromEvent, extractKeyFromEvent } from '../../utils/common';
+import { extractValueFromEvent, extractKeyFromEvent } from '../../utils/common';
 
 const { Redirect } = Routing;
 
@@ -24,7 +24,7 @@ export class AccountLogin extends Component {
 
   submit = () => {
     const { dispatchLogin } = this.props;
-    const { email } = this.state;
+    const { email, password } = this.state; // eslint-disable-line no-unused-vars
 
     this.setState({ error: '' });
     dispatchLogin({ email });
@@ -44,44 +44,48 @@ export class AccountLogin extends Component {
       return <Redirect to="/" />;
     }
 
-    const content = (
-      <View style={styles.loginForm}>
-        <Text style={styles.label}>{translations.login__email__label}</Text>
-        <TextInput
-          onChangeText={this.onEmailChange}
-          placeholder={translations.login__email__placeholder}
-          style={styles.textinput}
-          onKeyPress={this.handleKeyDown}
-        />
-        <Text style={styles.label}>{translations.login__password__label}</Text>
-        <TextInput
-          secureTextEntry
-          onChangeText={this.onPassChange}
-          placeholder={translations.login__password__placeholder}
-          style={styles.textinput}
-          onKeyPress={this.handleKeyDown}
-        />
-        <Button style={styles.button} textStyle={styles.buttonText} onClick={this.submit} text={translations.login} />
-        {!!error && <Text>{error}</Text>}
-      </View>
-    );
-
-    if (isWeb) {
-      return content;
-    }
     return (
-      <ScrollView>
-        {content}
-      </ScrollView>
+      <View style={styles.container}>
+        <View style={styles.loginForm}>
+          <Text style={styles.label}>{translations.login__email__label}</Text>
+          <TextInput
+            onChangeText={this.onEmailChange}
+            placeholder={translations.login__email__placeholder}
+            style={styles.textinput}
+            onKeyPress={this.handleKeyDown}
+          />
+          <Text style={styles.label}>{translations.login__password__label}</Text>
+          <TextInput
+            secureTextEntry
+            onChangeText={this.onPassChange}
+            placeholder={translations.login__password__placeholder}
+            style={styles.textinput}
+            onKeyPress={this.handleKeyDown}
+          />
+          <Button style={styles.button} textStyle={styles.buttonText} onClick={this.submit} text={translations.login} />
+          {!!error && <Text>{error}</Text>}
+        </View>
+      </View>
     );
   }
 }
 
 export const styles = StyleSheet.create({
-  loginForm: {
+  container: {
+    alignSelf: 'stretch',
+    height: '100%',
     flex: 1,
-    backgroundColor: '#F5FCFF',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loginForm: {
+    height: '100%',
+    backgroundColor: '#FFFFFF',
+    alignSelf: 'stretch',
+    flex: 1,
     flexDirection: 'column',
+    justifyContent: 'center',
   },
   button: {
     margin: 10,

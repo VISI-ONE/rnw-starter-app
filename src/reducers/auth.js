@@ -1,5 +1,4 @@
 import { LOGIN, LOGOUT } from '../actions/types';
-import { logout } from '../utils/modules/auth';
 
 const initialState = {
   user: null,
@@ -15,7 +14,6 @@ export default (state = initialState, action) => {
         isLoggedIn: true
       };
     case LOGOUT:
-      logout();
       return {
         ...state,
         user: null,

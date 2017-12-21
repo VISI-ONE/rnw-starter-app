@@ -4,7 +4,7 @@ import { StyleSheet, View, Text, Image } from 'react-native';
 import { logout as logoutAction } from '../../actions/auth';
 import Button from '../../components/Button';
 
-const logo = require('../../assets/logo.svg');
+const logo = require('../../assets/logo.png');
 
 export class Home extends Component {
   logout = () => {
@@ -13,12 +13,11 @@ export class Home extends Component {
   }
 
   render() {
-    const { translations, qrCode } = this.props;
+    const { translations } = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.content}>
           <Text style={styles.biggerText}>{translations.home__welcome}</Text>
-          {qrCode && <Text style={styles.biggerText}>{`${translations.home__your_qr_code}${qrCode}`}</Text>}
           <Image
             source={logo}
             style={styles.image}
@@ -41,7 +40,8 @@ export const styles = StyleSheet.create({
     alignSelf: 'stretch',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    backgroundColor: '#F5FCFF',
+    paddingTop: 10,
   },
   content: {
     flex: 1,
@@ -63,17 +63,15 @@ export const styles = StyleSheet.create({
     color: '#00F',
   },
   image: {
-    width: 250,
-    height: 76
+    width: 300,
+    height: 300
   }
 });
 
 export const mapStateToProps = state => ({
-  qrCode: state.qr.data,
   translations: {
     home__loggedin: state.locale.translations.home__loggedin,
     home__welcome: state.locale.translations.home__welcome,
-    home__your_qr_code: state.locale.translations.home__your_qr_code,
     logout: state.locale.translations.logout,
   }
 });

@@ -1,0 +1,134 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App component renders properly - ios 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "stretch",
+        "flex": 1,
+        "flexDirection": "row",
+        "height": "100%",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignSelf": "stretch",
+          "backgroundColor": "#FFFFFF",
+          "flex": 1,
+          "flexDirection": "column",
+          "height": "100%",
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "#000",
+            "margin": 10,
+          }
+        }
+      >
+        Email
+      </Text>
+      <TextInput
+        allowFontScaling={true}
+        onChangeText={[Function]}
+        onKeyPress={[Function]}
+        placeholder="example@example.com"
+        style={
+          Object {
+            "backgroundColor": "#fff",
+            "borderWidth": 1,
+            "color": "#000",
+            "margin": 10,
+            "padding": 5,
+          }
+        }
+      />
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "#000",
+            "margin": 10,
+          }
+        }
+      >
+        Password
+      </Text>
+      <TextInput
+        allowFontScaling={true}
+        onChangeText={[Function]}
+        onKeyPress={[Function]}
+        placeholder="******"
+        secureTextEntry={true}
+        style={
+          Object {
+            "backgroundColor": "#fff",
+            "borderWidth": 1,
+            "color": "#000",
+            "margin": 10,
+            "padding": 5,
+          }
+        }
+      />
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hasTVPreferredFocus={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignSelf": "center",
+            "backgroundColor": "transparent",
+            "margin": 10,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#00F",
+            }
+          }
+        >
+          Login
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;

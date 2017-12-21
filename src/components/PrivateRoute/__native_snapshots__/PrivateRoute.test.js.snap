@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PrivateRoute component renders properly when logged in - ios 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+>
+  this should not show to unlogged users
+</Text>
+`;
+
+exports[`PrivateRoute component renders properly when logged out - ios 1`] = `null`;

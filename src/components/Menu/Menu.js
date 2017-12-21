@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { View, StyleSheet } from 'react-native';
 import Link from '../Link';
 import LocalePicker from '../LocalePicker';
@@ -9,12 +10,16 @@ export const routes = [
     label: 'Home'
   },
   {
-    to: '/404',
-    label: '404'
+    to: '/About',
+    label: 'About'
+  },
+  {
+    to: '/Contact',
+    label: 'Contact'
   }
 ];
 
-export const Menu = () => (
+export const Menu = ({ isLoggedIn }) => isLoggedIn && (
   <View style={styles.container}>
     {routes.map(route => (
       <Link to={route.to} textStyle={styles.linkText} key={`menuLink_${route.label}`} style={styles.link}>
@@ -27,19 +32,18 @@ export const Menu = () => (
 
 export const styles = StyleSheet.create({
   container: {
-    height: 90,
+    height: 70,
     justifyContent: 'space-around',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
     flexDirection: 'row',
     borderBottomWidth: 1,
     borderColor: '#ccc',
-    marginBottom: 20,
-    marginTop: 20
   },
   link: {
     margin: 2,
     marginTop: 10,
+    height: 20,
   },
   linkText: {
     color: '#04f',
@@ -47,4 +51,7 @@ export const styles = StyleSheet.create({
   }
 });
 
-export default Menu;
+const mapStateToProps = state => ({
+  isLoggedIn: state.auth.isLoggedIn,
+});
+export default connect(mapStateToProps)(Menu);

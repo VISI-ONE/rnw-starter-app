@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Picker component renders properly - ios 1`] = `
+<View
+  style={
+    Object {
+      "cursor": "pointer",
+    }
+  }
+>
+  <RCTPicker
+    items={
+      Array [
+        Object {
+          "label": "en",
+          "textColor": undefined,
+          "value": "en-US",
+        },
+        Object {
+          "label": "de",
+          "textColor": undefined,
+          "value": "de-DE",
+        },
+      ]
+    }
+    onChange={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    selectedIndex={0}
+    style={
+      Object {
+        "height": 216,
+      }
+    }
+  />
+</View>
+`;

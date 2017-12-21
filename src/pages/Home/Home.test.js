@@ -25,7 +25,7 @@ describe('Home page', () => {
       fetch.mockResponseOnce(JSON.stringify({}));
       const logout = jest.fn();
       const tree = renderer.create(
-        <Home logout={logout} qrCode="asd" translations={translations} />
+        <Home logout={logout} translations={translations} />
       );
       expect(tree.toJSON()).toMatchSnapshot();
     });
@@ -55,12 +55,11 @@ describe('Home page', () => {
 
     it('render the proper structure with qr code', () => {
       const logout = jest.fn();
-      const tree = shallow(<Home logout={logout} qrCode="asd" translations={translations} />);
+      const tree = shallow(<Home logout={logout} translations={translations} />);
       const content = shallow(
         <View style={styles.container}>
           <View style={styles.content}>
             <Text style={styles.biggerText}>{translations.home__welcome}</Text>
-            <Text style={styles.biggerText}>{`${translations.home__your_qr_code}asd`}</Text>
             <Image
               source={require('../../assets/logo.png')}
               style={styles.image}
@@ -95,16 +94,12 @@ describe('Home page', () => {
 
   describe('redux', () => {
     it('mapStateToProps', () => {
-      const data = ' qr code';
-      const fakeState = { locale: { translations }, qr: { data } };
+      const fakeState = { locale: { translations } };
       const props = mapStateToProps(fakeState);
       expect(props).toEqual({
-        qrCode: data,
         translations: {
           home__loggedin: translations.home__loggedin,
-          home__loggedout: translations.home__loggedout,
           home__welcome: translations.home__welcome,
-          home__your_qr_code: translations.home__your_qr_code,
           logout: translations.logout,
         },
       });

@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Picker component renders properly - web 1`] = `
+<select
+  className={2}
+  onChange={[Function]}
+  value="en-US"
+>
+  <option
+    value="en-US"
+  >
+    en
+  </option>
+  <option
+    value="de-DE"
+  >
+    de
+  </option>
+</select>
+`;

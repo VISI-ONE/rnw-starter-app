@@ -44,23 +44,28 @@ LocalePicker.propTypes = {
   currentLocale: string,
   setLocale: func,
 };
-
 export const styles = StyleSheet.create({
   picker: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: '#FFFFFF',
-    top: Platform.select({
-      web: 10,
-      ios: -90,
-      android: -20,
+    ...Platform.select({
+      ios: {
+        position: 'absolute',
+        width: '100%',
+        left: 0,
+      },
+      android: {
+        margin: 2,
+        marginTop: 10,
+        width: '25%',
+        height: 30,
+      },
     }),
-    left: 0,
+    backgroundColor: '#FFFFFF',
   },
   button: {
     margin: 2,
-    marginTop: Platform.OS === 'ios' ? 40 : 2,
+    marginTop: 10,
     justifyContent: 'flex-end',
-    height: 10,
+    height: 20,
   },
 });
 

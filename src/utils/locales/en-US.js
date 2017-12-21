@@ -7,7 +7,5 @@ module.exports = {
   login__password__placeholder: '******',
   login: 'Login',
   logout: 'Logout',
-  flash: 'Flash',
   back: 'Back',
-  qr_code_instructions: 'Have the QR code in the middle of the screen',
 };

@@ -1,10 +1,5 @@
 import authReducer from '../auth';
 import { LOGIN, LOGOUT } from '../../actions/types';
-import { logout } from '../../utils/modules/auth';
-
-jest.mock('../../utils/modules/auth', () => {
-  return { logout: jest.fn() };
-});
 
 const fakeState = { test: 'fakeState' };
 
@@ -39,13 +34,11 @@ describe('Auth reducer', () => {
   });
 
   it('return the proper state for a LOGOUT action type adn call logout function from auth module', () => {
-    logout.mock.calls = [];
     const newState = authReducer(fakeState, { type: LOGOUT });
     expect(newState).toEqual({
       test: 'fakeState',
       user: null,
       isLoggedIn: false
     });
-    expect(logout.mock.calls.length).toEqual(1);
   });
 });

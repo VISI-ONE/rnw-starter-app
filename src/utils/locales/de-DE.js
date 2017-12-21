@@ -7,6 +7,5 @@ module.exports = {
   login__password__placeholder: '******',
   login: 'Einloggen',
   logout: 'Ausloggen',
-  flash: 'Blitz',
   back: 'Zuruck',
 };
