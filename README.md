@@ -1,6 +1,10 @@
 # The Platform agnostic React Native Web Starter App
 ### With Redux, Jest, Enzyme and React-Router
 
+<p align="center">
+<img src="https://raw.githubusercontent.com/VISI-ONE/rnw-starter-app/master/src/assets/logo.png">
+</p>
+
 ## Based on
 - [React Native for Web (react-native-web)](https://github.com/necolas/react-native-web)
 - [React Everywhere boilerplate (react-native-template-re-start)](https://github.com/react-everywhere/re-start)
@@ -36,6 +40,10 @@ yarn
 - IOS Simulator - `yarn ios`
 - Android Simulator - `yarn android`
 
+<p align="center">
+<img src="https://raw.githubusercontent.com/VISI-ONE/rnw-starter-app/master/src/assets/desktop.png" height="450"  width="70%">
+<img src="https://raw.githubusercontent.com/VISI-ONE/rnw-starter-app/master/src/assets/ios.png" height="450"  width="29%">
+</p>
 
 ## Testing
 
