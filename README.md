@@ -1,6 +1,8 @@
 # The Platform agnostic React Native Web Starter App
 ### With Redux, Jest, Enzyme and React-Router
 
+[More details in the release article](https://medium.com/@Or_yoffe/building-a-platform-agnostic-app-react-native-and-web-c0e82cbdda8)
+
 <p align="center">
 <img src="https://raw.githubusercontent.com/VISI-ONE/rnw-starter-app/master/src/assets/logo.png">
 </p>
