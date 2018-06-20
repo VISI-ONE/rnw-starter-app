@@ -1,3 +1,7 @@
+# [Deprecated]!
+# !Please use [Create React Native Web](https://www.npmjs.com/package/create-react-native-web-app) instead!
+
+
 # The Platform agnostic React Native Web Starter App
 ### With Redux, Jest, Enzyme and React-Router
 
